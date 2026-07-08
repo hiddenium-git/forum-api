@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.authentication.apps.AuthenticationConfig',
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,7 @@ DATABASES = {
 
 
 AUTH_USER_MODEL = "authentication.User"
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
