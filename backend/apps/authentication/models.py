@@ -17,5 +17,6 @@ class User(AbstractUser):
         auto_now_add=True
     )
     email = models.EmailField(
-        blank=False
+        blank=False,
+        unique=True,
     )
