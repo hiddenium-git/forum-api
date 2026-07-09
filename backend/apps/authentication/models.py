@@ -16,3 +16,6 @@ class User(AbstractUser):
     created_at = models.DateTimeField(
         auto_now_add=True
     )
+    email = models.EmailField(
+        blank=False
+    )
