@@ -49,7 +49,7 @@ class LogoutSerializer(serializers.Serializer):
 
     def validate(self, data):
         try:
-            token = RefreshToken(data=['refresh'])
+            token = RefreshToken(data['refresh'])
             token.blacklist()
         except Exception:
             raise serializers.ValidationError(
