@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User
-from rest_framework_simplejwt import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:

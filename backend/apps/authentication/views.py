@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer, LogoutSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
@@ -23,3 +23,12 @@ class LoginView(APIView):
             'refresh':str(refresh),
             'access':str(refresh.access_token)
             })
+
+class LogoutView(APIView):
+    def post(self, request):
+        serializer = LogoutSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        return Response({'message':'logout successfully'})
+
+    
