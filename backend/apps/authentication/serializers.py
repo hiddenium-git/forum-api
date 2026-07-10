@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User
-
+from rest_framework_simplejwt import RefreshToken
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,4 +42,17 @@ class LoginSerializer(serializers.Serializer):
                 'invalid Username or password'
             )
         data['user'] = user
+        return data
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    def validate(self, data):
+        try:
+            token = RefreshToken(data=['refresh'])
+            token.blacklist()
+        except Exception:
+            raise serializers.ValidationError(
+                'invalid token'
+            )
         return data
