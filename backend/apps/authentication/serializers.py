@@ -24,3 +24,16 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         user.save()
         return user
+    
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self,data):
+        username = data['username']
+        user = User.objects.filter(username=username).first()
+        if not user:
+            raise serializers.ValidationError(
+                'Username or password dos not exist'
+            )
+        return data
