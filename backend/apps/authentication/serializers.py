@@ -34,6 +34,6 @@ class LoginSerializer(serializers.Serializer):
         user = User.objects.filter(username=username).first()
         if not user:
             raise serializers.ValidationError(
-                'Username or password dos not exist'
+                'invalid Username or password'
             )
         return data
