@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import RegisterSerializer, LoginSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
 class RegisterView(APIView):
@@ -16,4 +17,9 @@ class LoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response({'message':'Login success'},status=status.HTTP_200_OK)
+        user = serializer.validated_data['user']
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh':str(refresh),
+            'access':str(refresh.access_token)
+            })
